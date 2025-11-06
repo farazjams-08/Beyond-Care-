@@ -1,0 +1,539 @@
+/* === BeyondCare — global UI refresh (2025 hackathon) === */
+:root{
+  --bg: #0b1220;
+  --card: rgba(255,255,255,0.08);
+  --card-border: rgba(255,255,255,0.15);
+  --text: #e9eef7;
+  --muted: #a7b2c6;
+  --accent: #6ae2ff;     /* cyan */
+  --accent-2: #8b6cff;   /* purple */
+  --danger: #ff6b6b;
+  --shadow: 0 10px 35px rgba(0,0,0,.45);
+  --radius: 16px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text); background: var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  overflow-x:hidden;
+}
+
+/* animated gradient orbs */
+.bg-orb{
+  position: fixed; inset:-20vmax; z-index:-2;
+  background:
+    radial-gradient(32vmax 32vmax at 15% 20%, rgba(107,149,255,.18), transparent 60%),
+    radial-gradient(28vmax 28vmax at 85% 30%, rgba(0,214,255,.16), transparent 60%),
+    radial-gradient(36vmax 36vmax at 50% 85%, rgba(173,120,255,.12), transparent 60%);
+  filter: blur(8px);
+  animation: float 18s ease-in-out infinite alternate;
+}
+@keyframes float{
+  from{transform: translateY(-12px)}
+  to{transform: translateY(12px)}
+}
+
+/* top brand */
+.brand{
+  position: fixed; top:18px; left:22px; display:flex; gap:10px; align-items:center;
+  color:var(--text); opacity:.9;
+}
+.brand .logo{
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 22px rgba(138,108,255,.35);
+  font-weight:900;
+}
+.brand span{ font-weight:700; letter-spacing:.3px }
+
+/* center card */
+.container{
+  width: min(92vw, 420px);
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 26px;
+  transform: translateZ(0);
+}
+
+h2{
+  margin:4px 0 12px; font-size: clamp(22px, 3.2vw, 26px); font-weight:800;
+}
+.subtitle{
+  margin:0 0 18px; color: var(--muted); font-size:14.5px;
+}
+
+form{ margin-top:10px }
+label{
+  display:block; font-size:12.5px; color:var(--muted); margin:10px 2px 6px;
+}
+input, textarea{
+  width:100%; padding:12px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04); color:var(--text);
+  outline:none; transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+input::placeholder{ color:#aab6c9a6 }
+input:focus{
+  border-color: rgba(106,226,255,.65);
+  box-shadow: 0 0 0 4px rgba(106,226,255,.12);
+  background: rgba(255,255,255,.06);
+}
+
+button{
+  width:100%; margin-top:14px; padding:12px 14px; border:none; border-radius:12px;
+  color:#0c1020; font-weight:800; letter-spacing:.2px; cursor:pointer;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 10px 26px rgba(107,149,255,.35), inset 0 0 0 1px rgba(255,255,255,.2);
+  transition: transform .08s ease, filter .18s ease, box-shadow .18s ease;
+}
+button:hover{ filter: brightness(1.05) }
+button:active{ transform: translateY(1px) }
+
+.alt{
+  margin-top:12px; text-align:center; color:var(--muted); font-size:14px;
+}
+.alt a{
+  color:#eaf3ff; text-decoration:none; font-weight:700;
+  border-bottom:1px solid transparent; transition: border-color .15s ease, color .15s ease;
+}
+.alt a:hover{ color:#fff; border-color:#fff }
+
+#msg{
+  margin-top:12px; font-size:13.5px; color: var(--danger);
+}
+
+/* small footer */
+.page-foot{
+  position: fixed; bottom:14px; left:0; right:0; text-align:center; color:var(--muted); font-size:12.5px;
+}
+
+/* utility for grids/rows reused by other pages */
+.row{ display:flex; gap:10px; flex-wrap:wrap }
+.output{
+  margin-top:14px; padding:12px; border-radius:10px;
+  background: rgba(106,226,255,.08); color:#e9f8ff; white-space:pre-wrap;
+}
+
+/* chat styles kept for other pages */
+.chatbox{height:320px;overflow:auto;background:rgba(255,255,255,.05);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+.chat-row{display:flex;gap:10px;margin-top:12px}
+.chat-row input{flex:1}
+
+/* responsive niceties */
+@media (max-width: 520px){
+  .brand{ left:16px; top:14px }
+  .container{ padding:24px 18px }
+}
+/* top nav */
+.top-nav{
+  position: fixed;
+  top:20px; right:22px;
+  display:flex; gap:16px; z-index:50;
+  background: rgba(255,255,255,0.06);
+  padding:10px 18px;
+  backdrop-filter: blur(12px);
+  border-radius:12px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.top-nav a{
+  text-decoration:none; 
+  color:var(--muted); 
+  font-weight:600; 
+  font-size:14px;
+  transition: color .15s ease;
+}
+
+.top-nav a:hover{
+  color:#fff;
+}
+
+.top-nav .active{
+  color:var(--accent);
+  font-weight:800;
+}
+
+.logout{ color:#ff8f8f !important; }
+
+/* dashboard grid */
+.dash-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:18px;
+  margin-top:18px;
+}
+
+.dash-card{
+  padding:20px;
+  border-radius:16px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  text-decoration:none;
+  color:var(--text);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, filter .2s ease;
+}
+
+.dash-card:hover{
+  transform: translateY(-3px);
+  filter: brightness(1.12);
+}
+
+.dash-card h3{
+  margin:0 0 6px;
+  font-size:18px;
+  font-weight:800;
+}
+
+.history-section pre{
+  white-space:pre-wrap;
+  color:#e6f9ff;
+  background:rgba(255,255,255,.05);
+  padding:8px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.1);
+}
+/* Cleaner, premium input wrapper */
+.chat-input-wrapper {
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+  padding:14px;
+  border-radius:16px;
+
+  background:rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 0 20px rgba(0,0,0,.25);
+}
+
+/* Beautiful input */
+.chat-input {
+  flex:1;
+  padding:14px 16px;
+  border-radius:12px;
+  border:none;
+
+  background:rgba(255,255,255,.15);
+  color:white;
+
+  font-size:16px;
+  outline:none;
+  transition:.3s;
+}
+
+/* Glow when typing */
+.chat-input:focus {
+  background:rgba(255,255,255,.22);
+  box-shadow:0 0 10px rgba(0,180,255,.4);
+}
+
+/* Send button refined */
+.chat-send-btn {
+  padding:14px 20px;
+  font-size:16px;
+  font-weight:600;
+
+  border:none;
+  border-radius:12px;
+
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#0b0f1c;
+
+  cursor:pointer;
+  transition:.3s;
+}
+
+/* Hover effect */
+.chat-send-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+/* Larger, clearer typing space */
+.chat-input-wrapper.big-input {
+  display:flex;
+  gap:12px;
+  margin-top:20px;
+  padding:18px;
+
+  background:rgba(255,255,255,.12);
+  backdrop-filter: blur(14px);
+  border-radius:18px;
+
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 0 25px rgba(0,0,0,.35);
+}
+
+/* Big, premium textarea */
+.chat-input-area {
+  flex:1;
+  padding:16px 18px;
+  min-height:70px;
+  max-height:150px;
+
+  border:none;
+  resize:none;
+
+  border-radius:14px;
+  font-size:17px;
+  line-height:1.5;
+
+  background:rgba(255,255,255,.2);
+  color:white;
+
+  transition:0.3s ease;
+  outline:none;
+}
+
+/* Focus Glow */
+.chat-input-area:focus {
+  background:rgba(255,255,255,.28);
+  box-shadow:0 0 12px rgba(0,160,255,.55);
+}
+
+/* Bigger Send Button */
+.chat-send-btn {
+  padding:16px 22px;
+  font-size:17px;
+  font-weight:700;
+
+  border:none;
+  border-radius:14px;
+
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#0b0f1c;
+
+  cursor:pointer;
+  transition:0.25s ease-in-out;
+}
+
+/* Hover */
+.chat-send-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 5px 14px rgba(0,0,0,.35);
+}
+/* Big input bar */
+.chat-input-wrapper.big-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 16px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 18px;
+}
+
+/* Auto-expanding textarea */
+.chat-input-area {
+  flex: 1;
+  padding: 14px 16px;
+  min-height: 55px;
+  max-height: 200px;
+  overflow-y: auto;
+
+  border: none;
+  border-radius: 14px;
+  resize: none;
+
+  background: rgba(255,255,255,.2);
+  color: white;
+  font-size: 16px;
+  line-height: 1.45;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.chat-input-area:focus {
+  background: rgba(255,255,255,.28);
+  box-shadow: 0 0 12px rgba(0,180,255,.55);
+}
+
+/* Smaller send button */
+.small-btn {
+  padding: 10px 16px;   /* shorter */
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0b0f1c;
+  border: none;
+  cursor: pointer;
+
+  transition: .25s ease;
+  height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.small-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0,0,0,.35);
+}
+/* --- Chatbot input bar fixes --- */
+.chat-input-bar{
+  display:flex;
+  gap:10px;
+  align-items:flex-end;
+}
+
+.chat-input{
+  flex:1 1 auto;          /* take all remaining space */
+  width:100%;
+  min-height:64px;
+  max-height:180px;
+  overflow-y:auto;
+  resize:none;
+}
+
+/* override global button{width:100%} just for the send button */
+.send-btn{
+  flex:0 0 auto;
+  width:auto !important;   /* stop stretching */
+  padding:8px 12px;        /* small */
+  height:40px;             /* compact */
+  line-height:24px;
+  font-size:16px;
+  border-radius:10px;
+}
+
+/* optional: make it a tiny round icon button */
+.send-btn.icon {
+  width:40px !important;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+}
+/* === FIX DASHBOARD GRID LAYOUT === */
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Dashboard Cards */
+.dash-card {
+  display: block;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  backdrop-filter: blur(14px);
+  text-decoration: none;
+  color: white;
+
+  /* Ensures equal height → prevents upward shifting */
+  min-height: 150px;
+
+  transition: 0.25s ease;
+}
+
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+.container {
+  max-width: 880px;   /* increased slightly */
+}
+/* ===== FIX HOME PAGE SPACING + RESPONSIVENESS ===== */
+
+:root {
+  --nav-height: 70px;
+}
+
+/* Reduce orb intensity */
+.bg-orb {
+  top: -180px !important;
+}
+
+/* Ensure top-nav never overlaps content */
+.top-nav {
+  padding: 10px 26px;
+  height: var(--nav-height);
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  gap: 22px;
+}
+
+/* Adjust main container spacing */
+.container {
+  max-width: 980px;
+  padding: 20px 24px;
+  margin: calc(var(--nav-height) + 40px) auto;
+}
+
+/* Make hero compact */
+.hero {
+  margin-top: 10px !important;
+}
+
+.hero h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.hero p {
+  font-size: 15px;
+  max-width: 460px;
+}
+
+/* Fix card grid so it fits laptop screens */
+.dash-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.dash-card {
+  padding: 22px;
+  min-height: 140px;
+  border-radius: 14px;
+}
+
+/* Fix history section spacing */
+.section-title {
+  margin-top: 32px;
+  font-size: 18px;
+}
+
+/* Ensure no horizontal scroll */
+body, html {
+  overflow-x: hidden;
+}
+
+/* Mobile Fixes */
+@media screen and (max-width: 768px) {
+  .top-nav {
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .container {
+    margin-top: 100px !important;
+    padding: 16px;
+  }
+
+  .dash-card {
+    padding: 18px;
+    min-height: 130px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+}

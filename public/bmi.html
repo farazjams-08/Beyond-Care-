@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>BeyondCare — BMI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Background Glow -->
+  <div class="bg-orb"></div>
+
+  <!-- Branding -->
+  <div class="brand">
+    <div class="logo">BC</div>
+    <span>BeyondCare</span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <a href="/home">Home</a>
+    <a href="/bmi" class="active">BMI</a>
+    <a href="/symptoms">Symptoms</a>
+    <a href="/reports">Reports</a>
+    <a href="/chatbot">Chatbot</a>
+    <a id="logout" href="#" class="logout">Logout</a>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container" style="margin-top:100px;">
+    <h2>BMI Calculator</h2>
+    <p class="subtitle">Calculate your BMI and instantly generate an AI-powered fitness & diet plan.</p>
+
+    <!-- Input Fields -->
+    <input id="weight" type="number" placeholder="Weight (kg)" />
+
+    <input id="height" type="number" placeholder="Height (cm)" />
+
+    <input id="age" type="number" placeholder="Age (optional)" />
+
+    <input id="gender" placeholder="Gender (optional)" />
+
+    <!-- Buttons -->
+    <div class="row" style="margin-top:12px;">
+      <button id="aiBmi">Get AI Plan</button>
+      <button id="localBmi">Local Advice</button>
+    </div>
+
+    <!-- Output -->
+    <div id="bmiOut" class="output" style="margin-top:18px; min-height:40px;"></div>
+  </div>
+
+  <div class="page-foot">© BeyondCare • Hackathon Edition</div>
+
+  <script src="/js/bmi.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>BeyondCare — Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="bg-orb"></div>
+
+  <div class="brand">
+    <div class="logo">BC</div>
+    <span>BeyondCare</span>
+  </div>
+
+  <div class="container">
+    <h2>Welcome back</h2>
+    <p class="subtitle">Sign in to continue to your health dashboard.</p>
+
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@example.com" required />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="alt">Don’t have an account? <a href="/register">Create one</a></p>
+    <p id="msg"></p>
+  </div>
+
+  <div class="page-foot">© BeyondCare • Hackathon Edition</div>
+
+  <script src="/js/auth.js" defer></script>
+</body>
+</html>

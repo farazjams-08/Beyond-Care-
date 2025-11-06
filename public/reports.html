@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>BeyondCare — Reports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    .container.reports { max-width: 880px; margin-top: 100px; }
+    .upload-card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px;
+      padding: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .report-item{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0;
+    }
+    .report-actions a, .report-actions button{
+      margin-right: 8px;
+    }
+    .summary{
+      white-space: pre-wrap;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+    .top-nav a[href="/reports"]{ color: var(--accent); font-weight: 800; }
+  </style>
+</head>
+
+<body>
+  <div class="bg-orb"></div>
+
+  <div class="brand">
+    <div class="logo">BC</div>
+    <span>BeyondCare</span>
+  </div>
+
+  <nav class="top-nav">
+    <a href="/home">Home</a>
+    <a href="/bmi">BMI</a>
+    <a href="/symptoms">Symptoms</a>
+    <a href="/reports" class="active">Reports</a>
+    <a href="/chatbot">Chatbot</a>
+    <a id="logout" href="#" class="logout">Logout</a>
+  </nav>
+
+  <div class="container reports">
+    <h2>Upload & Analyze Reports</h2>
+    <p class="subtitle">Upload PDFs (best) or images. We’ll extract text and generate an AI summary with key findings.</p>
+
+    <div class="upload-card">
+      <form id="uploadForm">
+        <input type="file" id="file" accept=".pdf,.txt,image/*" required style="margin: 8px 0;" />
+        <button type="submit">Upload & Analyze</button>
+      </form>
+      <p id="upMsg" class="subtitle" style="margin-top:8px;"></p>
+    </div>
+
+    <h3 style="margin-top: 18px;">My Reports</h3>
+    <div id="reportsList"></div>
+  </div>
+
+  <div class="page-foot">© BeyondCare • Hackathon Edition</div>
+
+  <script src="/js/reports.js" defer></script>
+</body>
+</html>
